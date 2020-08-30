@@ -28,7 +28,7 @@ namespace ezGift.Services
                     LastName = model.LastName,
                     Address = model.Address,
                     Email = model.Email,
-                    OwnerId = model.OwnerId
+                    OwnerId = _userId
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -57,6 +57,28 @@ namespace ezGift.Services
                             }
                         );
                 return query.ToArray();
+            }
+        }
+
+        public UserProfileDetail GetUserProfileById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .UserProfiles
+                        .Single(e => e.UserProfileId == id && e.OwnerId == _userId);
+                return
+                    new UserProfileDetail
+                    {
+                        UserProfileId = entity.UserProfileId,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        Name = entity.Name,
+                        Email = entity.Email,
+                        Address = entity.Address,
+                        OwnerId = entity.OwnerId
+                    };
             }
         }
     }
