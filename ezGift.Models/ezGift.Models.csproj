@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserProfileCreate.cs" />
     <Compile Include="UserProfileDetail.cs" />
+    <Compile Include="UserProfileEdit.cs" />
     <Compile Include="UserProfileListItem.cs" />
   </ItemGroup>
   <ItemGroup>

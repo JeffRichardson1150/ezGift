@@ -55,6 +55,70 @@ namespace ezGift.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var service = CreateUserProfileService();
+            var detail = service.GetUserProfileById(id);
+            var model =
+                new UserProfileEdit
+                {
+                    UserProfileId = detail.UserProfileId,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    Address = detail.Address,
+                    Email = detail.Email
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, UserProfileEdit model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.UserProfileId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
+
+            var service = CreateUserProfileService();
+
+            if (service.UpdateUserProfile(model))
+            {
+                TempData["SaveResult"] = "Your User Profile was updated";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your User Profile could not be updated.");
+            return View(model);
+        }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateUserProfileService();
+            var model = svc.GetUserProfileById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateUserProfileService();
+            service.DeleteUserProfile(id);
+            TempData["SaveResult"] = "Your User Profile was deleted.";
+            return RedirectToAction("Index");
+
+        }
+
         private UserProfileService CreateUserProfileService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
