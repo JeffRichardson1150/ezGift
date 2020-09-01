@@ -24,20 +24,24 @@ namespace ezGift.WebMVC.Controllers
         //Get for Create
         public ActionResult Create()
         {
+            var email = User.Identity.GetUserName();
+
+            // Each Registered Account may only have 1 User Profile
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserProfileService(userId);
+            // Check whether this Account already has a User Profile
             var model = service.GetUserProfileByOwner(userId);
-            //if (model.OwnerId == userId)
+            // If there already is a UserProfile for this Account
             if (model != null)
             {
-                //return RedirectToAction("Details");
+                // Format the message
                 TempData["SaveResult"] = "A User Profile for this Account already exists.";
 
-                //return RedirectToAction("Edit", new { model.UserProfileId, model});
-                //return RedirectToAction("DetailMe", new { model});
+                // Redirect to the ActionResult DetailMe and pass it a UserProfileDetail model
+                // containing the contents of the existing UserProfile for this Account
                 return RedirectToAction("DetailMe", new 
-                { 
-                    UserProfileId = model.UserProfileId, 
+                {
+                    UserProfileId = model.UserProfileId,
                     FirstName = model.FirstName, 
                     LastName = model.LastName,
                     Name = model.Name,
@@ -46,12 +50,23 @@ namespace ezGift.WebMVC.Controllers
                     OwnerId = model.OwnerId
                 });
 
-                //return View(model);
-                //Details(model);
             }
+            // If there isn't an existing UserProfile for this Registered Account
+            // return a blank View so we can Create a new UserProfile
             else
             {
-                return View();
+                return View(
+                    new UserProfileCreate
+                    {
+                        //UserProfileId = "",
+                        FirstName = "",
+                        LastName = "",
+                        //Name = "",
+                        Address = "",
+                        Email = email,
+                        //xxxxxxxx - xxxx - xxxx - xxxx - xxxxxxxxxxxx
+                        OwnerId = Guid.Parse("00000000-0000-0000-0000-000000000000")
+                    });
             }
         }
 
@@ -75,11 +90,9 @@ namespace ezGift.WebMVC.Controllers
             return View(model);
         }
 
-        // I created this for the UserProfileCreate.
-        // The idea was - When select Create user profile, I first check to see whether a UserProfile exists
-        // If it does, I show that UserProfile using the UserProfileDetail model
-        // That approach didn't work well because the Create expects the UserProfileCreate model
-        // 
+        // Called from Create (Get)
+        // When someone tries to create a User Profile, if a User Profile already exists for that Registered Account
+        // Display the existing UserProfile in Detail View.  From there, they can Edit it, or return to Index
         public ActionResult DetailMe(UserProfileDetail model)
         {
             TempData["SaveResult"] = "A User Profile for this Account already exists.";

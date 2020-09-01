@@ -150,7 +150,7 @@ namespace ezGift.Services
 
         public bool DeleteUserProfile(int userProfileId)
         {
-            DeleteUserEvents(userProfileId);
+            //DeleteUserEvents(userProfileId);
 
             using (var ctx = new ApplicationDbContext())
             {
@@ -165,6 +165,10 @@ namespace ezGift.Services
             }
         }
 
+        // I created this method to delete all RegistryEvents that belong 
+        // to the UserProfile being deleted
+        // But it's not needed; When I delete the UserProfile, all of it's Events
+        // get deleted.  Why??
         public bool DeleteUserEvents(int id)
         {
             using (var ctx = new ApplicationDbContext())
