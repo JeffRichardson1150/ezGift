@@ -82,6 +82,49 @@ namespace ezGift.Services
             }
         }
 
+            public UserProfileDetail GetUserProfileByOwner(Guid id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .UserProfiles
+                        .FirstOrDefault(e => e.OwnerId == id);
+                if (entity != null)
+                {
+
+                return
+                    new UserProfileDetail
+                    {
+                        UserProfileId = entity.UserProfileId,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        Name = entity.Name,
+                        Email = entity.Email,
+                        Address = entity.Address,
+                        OwnerId = entity.OwnerId
+                    };
+                }
+                else
+                {
+                    //Guid g = new Guid("11223344-5566-7788-99AA-BBCCDDEEFF00");
+                    Guid guidVar = new Guid("00000000-0000-0000-0000-000000000000");
+                    return
+                    new UserProfileDetail
+                    {
+                        UserProfileId = 0,
+                        FirstName = "",
+                        LastName = "",
+                        Name = "",
+                        Email = "",
+                        Address = "",
+                        OwnerId = guidVar
+                    };
+                }
+
+            }
+        }
+
         public bool UpdateUserProfile(UserProfileEdit model)
         {
             using (var ctx = new ApplicationDbContext())

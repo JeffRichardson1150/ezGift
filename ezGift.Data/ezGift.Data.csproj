@@ -55,6 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202008312105378_InitialCreate.cs" />
+    <Compile Include="Migrations\202008312105378_InitialCreate.Designer.cs">
+      <DependentUpon>202008312105378_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009010417116_addedEventLocation.cs" />
+    <Compile Include="Migrations\202009010417116_addedEventLocation.Designer.cs">
+      <DependentUpon>202009010417116_addedEventLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryEvent.cs" />
     <Compile Include="UserProfile.cs" />
@@ -62,6 +71,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202008312105378_InitialCreate.resx">
+      <DependentUpon>202008312105378_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009010417116_addedEventLocation.resx">
+      <DependentUpon>202009010417116_addedEventLocation.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

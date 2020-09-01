@@ -24,7 +24,21 @@ namespace ezGift.WebMVC.Controllers
         //Get for Create
         public ActionResult Create()
         {
-            return View();
+            //var userId = Guid.Parse(User.Identity.GetUserId());
+            //var service = new UserProfileService(userId);
+            //var model = service.GetUserProfileByOwner(userId);
+            //if (model.OwnerId == userId)
+            //{
+            //    //return RedirectToAction("Details");
+            //    TempData["SaveResult"] = "A User Profile for this Account already exists.";
+
+            //    return View(model);
+            //    //Details(model);
+            //}
+            //else
+            //{
+                return View();
+            //}
         }
 
         // POST for Create
@@ -39,13 +53,25 @@ namespace ezGift.WebMVC.Controllers
             var service = CreateUserProfileService();
             if (service.CreateUserProfile(model))
             {
-                TempData["SaveResult"] = "Your note was created.";
+                TempData["SaveResult"] = "Your User Profile was created.";
                 return RedirectToAction("Index");
 
             };
-            ModelState.AddModelError("", "Note could not be created.");
+            ModelState.AddModelError("", "User Profile could not be created.");
             return View(model);
         }
+
+        // I created this for the UserProfileCreate.
+        // The idea was - When select Create user profile, I first check to see whether a UserProfile exists
+        // If it does, I show that UserProfile using the UserProfileDetail model
+        // That approach didn't work well because the Create expects the UserProfileCreate model
+        // 
+        //public ActionResult Details(UserProfileDetail model)
+        //{
+        //    TempData["SaveResult"] = "A User Profile for this Account already exists.";
+
+        //    return View(model);
+        //}
 
         public ActionResult Details(int id)
         {

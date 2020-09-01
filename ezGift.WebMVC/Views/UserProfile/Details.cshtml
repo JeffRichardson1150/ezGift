@@ -1,13 +1,25 @@
 ﻿@model ezGift.Models.UserProfileDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Profile Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert=success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+
 
 <div>
-    <h4>UserProfileDetail</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

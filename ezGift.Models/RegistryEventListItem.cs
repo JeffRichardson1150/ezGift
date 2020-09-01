@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ezGift.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,29 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ezGift.Data
+namespace ezGift.Models
 {
-    public class RegistryEvent
+    public class RegistryEventListItem
     {
-        [Key]
+        [Display(Name="Event ID")]
         public int RegistryEventId { get; set; }
 
-        [Required]
+        [Display(Name = "User Profile ID")]
         public int UserProfileId { get; set; }
 
         [ForeignKey(nameof(UserProfileId))]
         public virtual UserProfile UserProfile { get; set; }
 
-        [Required]
+        [Display(Name = "Event Title")]
         public string RegistryEventTitle { get; set; }
 
-        [Required]
+        [Display(Name = "Event Description")]
         public string RegistryEventDescription { get; set; }
 
-        [Required]
+        [Display(Name = "Event Location")]
         public string EventLocation { get; set; }
 
-        [Required]
+        [Display(Name = "Event Date")]
         public DateTimeOffset EventDate { get; set; }
+
     }
 }

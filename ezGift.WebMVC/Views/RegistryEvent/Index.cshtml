@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ezGift.Models.RegistryEventListItem>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert=success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <!--
+
+        <th>
+            @Html.DisplayNameFor(model => model.RegistryEventId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfileId)
+        </th>
+        -->
+        <th>
+            @Html.DisplayNameFor(model => model.RegistryEventTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistryEventDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @Html.HiddenFor(model => item.UserProfileId)
+        @Html.HiddenFor(model => item.RegistryEventId)
+
+        <tr>
+            <!--
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistryEventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserProfileId)
+            </td>
+            -->
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistryEventTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistryEventDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RegistryEventId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RegistryEventId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RegistryEventId })
+            </td>
+        </tr>
+    }
+
+</table>

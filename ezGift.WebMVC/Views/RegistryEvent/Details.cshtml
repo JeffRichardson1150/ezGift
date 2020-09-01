@@ -1,0 +1,78 @@
+﻿@model ezGift.Models.RegistryEventDetail
+
+@{
+    ViewBag.Title = "Event Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistryEventId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistryEventId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfileId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfileId)
+        </dd>
+
+        <dt>
+            <!--
+                
+            @Html.DisplayNameFor(model => model.UserProfile.Name)
+            -->
+            Event Owner
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistryEventTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistryEventTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistryEventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistryEventDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RegistryEventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -55,6 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryEventCreate.cs" />
+    <Compile Include="RegistryEventDetail.cs" />
+    <Compile Include="RegistryEventEdit.cs" />
+    <Compile Include="RegistryEventListItem.cs" />
     <Compile Include="UserProfileCreate.cs" />
     <Compile Include="UserProfileDetail.cs" />
     <Compile Include="UserProfileEdit.cs" />
@@ -63,6 +67,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ezGift.Data\ezGift.Data.csproj">
+      <Project>{BC49F8B0-C00B-4DCC-A7A7-67D52D89B186}</Project>
+      <Name>ezGift.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

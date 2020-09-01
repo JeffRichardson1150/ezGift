@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RegistryEventController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,6 +241,11 @@
     <Content Include="Views\UserProfile\Details.cshtml" />
     <Content Include="Views\UserProfile\Edit.cshtml" />
     <Content Include="Views\UserProfile\Delete.cshtml" />
+    <Content Include="Views\RegistryEvent\Index.cshtml" />
+    <Content Include="Views\RegistryEvent\Create.cshtml" />
+    <Content Include="Views\RegistryEvent\Details.cshtml" />
+    <Content Include="Views\RegistryEvent\Edit.cshtml" />
+    <Content Include="Views\RegistryEvent\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
