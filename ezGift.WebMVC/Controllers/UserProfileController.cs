@@ -24,21 +24,35 @@ namespace ezGift.WebMVC.Controllers
         //Get for Create
         public ActionResult Create()
         {
-            //var userId = Guid.Parse(User.Identity.GetUserId());
-            //var service = new UserProfileService(userId);
-            //var model = service.GetUserProfileByOwner(userId);
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new UserProfileService(userId);
+            var model = service.GetUserProfileByOwner(userId);
             //if (model.OwnerId == userId)
-            //{
-            //    //return RedirectToAction("Details");
-            //    TempData["SaveResult"] = "A User Profile for this Account already exists.";
+            if (model != null)
+            {
+                //return RedirectToAction("Details");
+                TempData["SaveResult"] = "A User Profile for this Account already exists.";
 
-            //    return View(model);
-            //    //Details(model);
-            //}
-            //else
-            //{
+                //return RedirectToAction("Edit", new { model.UserProfileId, model});
+                //return RedirectToAction("DetailMe", new { model});
+                return RedirectToAction("DetailMe", new 
+                { 
+                    UserProfileId = model.UserProfileId, 
+                    FirstName = model.FirstName, 
+                    LastName = model.LastName,
+                    Name = model.Name,
+                    Address = model.Address,
+                    Email = model.Email,
+                    OwnerId = model.OwnerId
+                });
+
+                //return View(model);
+                //Details(model);
+            }
+            else
+            {
                 return View();
-            //}
+            }
         }
 
         // POST for Create
@@ -66,12 +80,12 @@ namespace ezGift.WebMVC.Controllers
         // If it does, I show that UserProfile using the UserProfileDetail model
         // That approach didn't work well because the Create expects the UserProfileCreate model
         // 
-        //public ActionResult Details(UserProfileDetail model)
-        //{
-        //    TempData["SaveResult"] = "A User Profile for this Account already exists.";
+        public ActionResult DetailMe(UserProfileDetail model)
+        {
+            TempData["SaveResult"] = "A User Profile for this Account already exists.";
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         public ActionResult Details(int id)
         {

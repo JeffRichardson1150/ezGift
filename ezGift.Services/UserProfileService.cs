@@ -82,6 +82,8 @@ namespace ezGift.Services
             }
         }
 
+            //public UserProfileCreate GetUserProfileByOwner(Guid id)
+            //public UserProfileEdit GetUserProfileByOwner(Guid id)
             public UserProfileDetail GetUserProfileByOwner(Guid id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -94,6 +96,8 @@ namespace ezGift.Services
                 {
 
                 return
+                    //new UserProfileCreate
+                    //new UserProfileEdit
                     new UserProfileDetail
                     {
                         UserProfileId = entity.UserProfileId,
@@ -107,19 +111,20 @@ namespace ezGift.Services
                 }
                 else
                 {
-                    //Guid g = new Guid("11223344-5566-7788-99AA-BBCCDDEEFF00");
-                    Guid guidVar = new Guid("00000000-0000-0000-0000-000000000000");
-                    return
-                    new UserProfileDetail
-                    {
-                        UserProfileId = 0,
-                        FirstName = "",
-                        LastName = "",
-                        Name = "",
-                        Email = "",
-                        Address = "",
-                        OwnerId = guidVar
-                    };
+                    return null;
+                    ////Guid g = new Guid("11223344-5566-7788-99AA-BBCCDDEEFF00");
+                    //Guid guidVar = new Guid("00000000-0000-0000-0000-000000000000");
+                    //return
+                    //new UserProfileCreate
+                    //{
+                    //    UserProfileId = 0,
+                    //    FirstName = "",
+                    //    LastName = "",
+                    //    Name = "",
+                    //    Email = "",
+                    //    Address = "",
+                    //    OwnerId = guidVar
+                    //};
                 }
 
             }
@@ -145,6 +150,8 @@ namespace ezGift.Services
 
         public bool DeleteUserProfile(int userProfileId)
         {
+            DeleteUserEvents(userProfileId);
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
@@ -157,5 +164,36 @@ namespace ezGift.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteUserEvents(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .RegistryEvents
+                    .Where(e => e.UserProfileId == id);
+                    //.Select(
+                    //    e =>
+                    //        new UserProfileListItem
+                    //        {
+                    //            UserProfileId = e.UserProfileId,
+                    //            FirstName = e.FirstName,
+                    //            LastName = e.LastName,
+                    //            Email = e.Email
+                    //        }
+                    //    );
+                int nbrChanges = 0;
+                foreach (var item in entity)
+                {
+
+                    ctx.RegistryEvents.Remove(item);
+                    nbrChanges += 1;
+                }
+
+                return ctx.SaveChanges() == nbrChanges;
+            }
+        }
+
     }
 }

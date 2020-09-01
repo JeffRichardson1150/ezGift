@@ -6,11 +6,21 @@
 
 <h2>@ViewBag.Title</h2>
 
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert=success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Each Registered User may have a User Profile</h4>
         <hr />

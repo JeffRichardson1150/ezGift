@@ -246,6 +246,7 @@
     <Content Include="Views\RegistryEvent\Details.cshtml" />
     <Content Include="Views\RegistryEvent\Edit.cshtml" />
     <Content Include="Views\RegistryEvent\Delete.cshtml" />
+    <Content Include="Views\UserProfile\DetailMe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

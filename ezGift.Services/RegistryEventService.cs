@@ -22,6 +22,14 @@ namespace ezGift.Services
 
         }
 
+        public bool CheckForUserProfile()
+        {
+            if (_thisUserProfileId == null)
+            {
+                return false;
+            }
+            return true;
+        }
         public bool CreateRegistryEvent(RegistryEventCreate model)
         {
             var entity =
@@ -43,13 +51,13 @@ namespace ezGift.Services
 
         public IEnumerable<RegistryEventListItem> GetRegistryEvents()
         {
-            if (_thisUserProfileId == null)
-            {
-                // NEED TO DO THIS
-                // error processing : return error that this Account has no Profile
-                // present the UserProfileCreate
-                return null;
-            }
+            //if (_thisUserProfileId == null)
+            //{
+            //    // NEED TO DO THIS
+            //    // error processing : return error that this Account has no Profile
+            //    // present the UserProfileCreate
+            //    return null;
+            //}
             using (var ctx = new ApplicationDbContext())
             {
                 var query =

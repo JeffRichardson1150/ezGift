@@ -24,7 +24,16 @@ namespace ezGift.WebMVC.Controllers
         //GET
         public ActionResult Create()
         {
-            return View();
+            var service = CreateRegistryEventService();
+
+            if (service.CheckForUserProfile())
+            {
+                return View();
+
+            }
+            TempData["SaveResult"] = "Your Event could not be created. Please create a User Profile.";
+            return RedirectToAction("Index");
+
         }
 
         // POST for Create
@@ -41,11 +50,11 @@ namespace ezGift.WebMVC.Controllers
             if (service.CreateRegistryEvent(model))
             {
                 // Use TempData rather than ViewBag. TempData removes information after it's accessed
-                TempData["SaveResult"] = "Your note was created.";
+                TempData["SaveResult"] = "Your Event was created.";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "RegistryEvent could not be created.");
+            ModelState.AddModelError("", "Your Event could not be created.");
             return View(model);
         }
         public ActionResult Details(int id)

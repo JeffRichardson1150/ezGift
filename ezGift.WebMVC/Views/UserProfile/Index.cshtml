@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ezGift.WebMVC.Models.UserProfileListItem>
 
 @{
-    ViewBag.Title = "User Profiles";
+    ViewBag.Title = "User Profile";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -62,6 +62,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.UserProfileId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.UserProfileId }) |
+                @Html.ActionLink("Events", "Index", "RegistryEvent") |
                 @Html.ActionLink("Delete", "Delete", new { id = item.UserProfileId })
             </td>
         </tr>
