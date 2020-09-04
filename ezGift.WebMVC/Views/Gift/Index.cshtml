@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ezGift.Models.GiftListItem>
+@{
+    var eventId = ViewContext.RouteData.Values["id"];
+    //var eventName = ViewContext.RouteData.Values["name"];
+
+    //int idInt = (int)eventId;
+    ViewBag.Event = eventId;
+    //ViewBag.EventName = eventName;
+
+    // the following doesn't work; eventId is an object (in debug it appears to be a string)
+    //var service = new ezGift.Services.RegistryEventService(eventId);
+    //var model = service.GetRegistryEventById(eventId);
+}
+
+@{
+    ViewBag.Title = "Gifts";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<!--
+    This is supposed to extract the first Gift from the list of Gifts for this RegistryEvent
+    Then display as an <h4>, the RegistryEventTitle in the Registry in the Gift
+
+    How can I pass in the RegistryEventTitle?  because when there are no Gifts registered,
+    I can't get the RegistryEventTitle
+-->
+@{
+    //var eventList = new List<ezGift.Models.GiftListItem>(Model);
+    //string eventTitle = "No Gifts Registered";
+    //if (eventList.Count() != 0)
+    //{
+
+    //    ezGift.Models.GiftListItem firstEvent = eventList.First();
+    //    eventTitle = firstEvent.RegistryEvent.RegistryEventTitle;
+    //}
+
+}
+<!--  How do I display the value of eventTitle? -->
+<h4>@ViewBag.EventName</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.Event })
+</p>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert=success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GiftId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistryEventId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiftDescription)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistryEventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GiftId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.GiftId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.GiftId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Back to Event List", "Index", "RegistryEvent", new { id = ViewBag.Event }, new { })

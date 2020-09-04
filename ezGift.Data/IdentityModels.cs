@@ -33,7 +33,7 @@ namespace ezGift.Data
         }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<RegistryEvent> RegistryEvents { get; set; }
-        //public DbSet<Gift> Gifts { get; set; }
+        public DbSet<Gift> Gifts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder

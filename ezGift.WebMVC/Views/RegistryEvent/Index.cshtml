@@ -76,6 +76,11 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.RegistryEventId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.RegistryEventId }) |
+                <!--
+                Html.ActionLink("Gift List", "Index", "Gift", new { id = item.RegistryEventId, name = item.RegistryEventTitle }, new { }) |
+                    
+                -->
+                @Html.ActionLink("Gift List", "Index", "Gift", new { id = item.RegistryEventId }, new { } ) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.RegistryEventId })
             </td>
         </tr>

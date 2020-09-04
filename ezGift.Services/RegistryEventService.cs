@@ -51,13 +51,6 @@ namespace ezGift.Services
 
         public IEnumerable<RegistryEventListItem> GetRegistryEvents()
         {
-            //if (_thisUserProfileId == null)
-            //{
-            //    // NEED TO DO THIS
-            //    // error processing : return error that this Account has no Profile
-            //    // present the UserProfileCreate
-            //    return null;
-            //}
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
@@ -190,7 +183,7 @@ namespace ezGift.Services
                 var entity =
                     ctx
                         .RegistryEvents
-                        .Single(e => e.RegistryEventId == registryEventId && e.UserProfileId == _thisUserProfileId);
+                        .Single(e => e.RegistryEventId == registryEventId);
 
                 ctx.RegistryEvents.Remove(entity);
 
