@@ -1,22 +1,23 @@
 ﻿@model IEnumerable<ezGift.Models.GiftListItem>
+@using Microsoft.AspNet.Identity;
 @{
-    var eventId = ViewContext.RouteData.Values["id"];
-    //var eventName = ViewContext.RouteData.Values["name"];
 
-    //int idInt = (int)eventId;
+    int eventId = Int32.Parse(ViewContext.RouteData.Values["id"].ToString());
+
     ViewBag.Event = eventId;
-    //ViewBag.EventName = eventName;
 
-    // the following doesn't work; eventId is an object (in debug it appears to be a string)
-    //var service = new ezGift.Services.RegistryEventService(eventId);
-    //var model = service.GetRegistryEventById(eventId);
+    var userId = Guid.Parse(User.Identity.GetUserId());
+    var service = new ezGift.Services.RegistryEventService(userId);
+    var entity = service.GetRegistryEventById(eventId);
+    string eventName = entity.RegistryEventTitle;
+    ViewBag.EventName = eventName;
 }
 
 @{
-    ViewBag.Title = "Gifts";
+    ViewBag.Title = "Gift Registry for ";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title @ViewBag.EventName</h2>
 
 <!--
     This is supposed to extract the first Gift from the list of Gifts for this RegistryEvent
@@ -37,7 +38,7 @@
 
 }
 <!--  How do I display the value of eventTitle? -->
-<h4>@ViewBag.EventName</h4>
+@*<h4>@ViewBag.EventName</h4>*@
 
 <p>
     @Html.ActionLink("Create New", "Create", new { id = ViewBag.Event })
@@ -56,12 +57,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.GiftId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegistryEventId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.GiftName)
         </th>
         <th>
@@ -72,13 +67,9 @@
 
     @foreach (var item in Model)
     {
+    @Html.HiddenFor(model => item.GiftId)
+    @Html.HiddenFor(model => item.RegistryEventId)
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GiftId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistryEventId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GiftName)
             </td>
