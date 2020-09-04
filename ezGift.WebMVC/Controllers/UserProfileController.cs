@@ -37,9 +37,9 @@ namespace ezGift.WebMVC.Controllers
                 // Format the message
                 TempData["SaveResult"] = "A User Profile for this Account already exists.";
 
-                // Redirect to the ActionResult DetailMe and pass it a UserProfileDetail model
+                // Redirect to the ActionResult ProfileExists and pass it a UserProfileDetail model
                 // containing the contents of the existing UserProfile for this Account
-                return RedirectToAction("DetailMe", new 
+                return RedirectToAction("ProfileExists", new 
                 {
                     UserProfileId = model.UserProfileId,
                     FirstName = model.FirstName, 
@@ -93,7 +93,7 @@ namespace ezGift.WebMVC.Controllers
         // Called from Create (Get)
         // When someone tries to create a User Profile, if a User Profile already exists for that Registered Account
         // Display the existing UserProfile in Detail View.  From there, they can Edit it, or return to Index
-        public ActionResult DetailMe(UserProfileDetail model)
+        public ActionResult ProfileExists(UserProfileDetail model)
         {
             TempData["SaveResult"] = "A User Profile for this Account already exists.";
 

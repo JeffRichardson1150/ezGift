@@ -1,4 +1,17 @@
 ﻿@model ezGift.Models.GiftCreate
+@using Microsoft.AspNet.Identity;
+@{
+
+    int eventId = Int32.Parse(ViewContext.RouteData.Values["id"].ToString());
+
+    ViewBag.Event = eventId;
+
+    var userId = Guid.Parse(User.Identity.GetUserId());
+    var service = new ezGift.Services.RegistryEventService(userId);
+    var entity = service.GetRegistryEventById(eventId);
+    string eventName = entity.RegistryEventTitle;
+    ViewBag.EventName = eventName;
+}
 
 @{
     ViewBag.Title = "Gift";
@@ -13,7 +26,7 @@
     @Html.HiddenFor(model => model.RegistryEventId)
 
     <div class="form-horizontal">
-        <h4>Add a Gift to the Registry</h4>
+        <h4>Add a Gift for @ViewBag.EventName Registry</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

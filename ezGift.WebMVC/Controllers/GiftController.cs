@@ -28,26 +28,15 @@ namespace ezGift.WebMVC.Controllers
         }
 
         //GET
-        //public ActionResult Create(int? id)
         public ActionResult Create(int id)
         {
-            //var service = CreateGiftService();
-
-            //if (id != null)
-            //{
-                int eventId = (int)id;
+                int eventId = id;
                 return View(new GiftCreate
             {
                     GiftName = "",
                     GiftDescription = "",
                     RegistryEventId = eventId,
-                    //RegistryEvent = null
             });
-            //}
-            //else
-            //{
-            //    return View();
-            //}
 
         }
 

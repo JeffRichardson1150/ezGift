@@ -1,10 +1,10 @@
 ﻿@model ezGift.Models.UserProfileDetail
 
 @{
-    ViewBag.Title = "DetailMe";
+    ViewBag.Title = "Profile Exists";
 }
 
-<h2>DetailMe</h2>
+<h2>@ViewBag.Title</h2>
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -17,7 +17,7 @@
 }
 
 <div>
-    <h4>UserProfileDetail</h4>
+    <h4>User Profile Detail</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
